@@ -1,0 +1,382 @@
+/* VR Meteo - style.css
+   Tema scuro con accenti ambra/verde.
+   Font: Sora (testo) + Fira Mono (dati numerici)
+*/
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --sfondo:        #0d1a0f;
+    --sfondo-card:   #142016;
+    --sfondo-card2:  #192b1b;
+    --testo:         #ede9e0;
+    --testo-muted:   #8fa888;
+    --accento:       #f0a030;
+    --verde:         #6dba58;
+    --bordo:         #253827;
+    --errore:        #d95f4b;
+
+    --font: 'Sora', sans-serif;
+    --mono: 'Fira Mono', monospace;
+}
+
+body {
+    background-color: var(--sfondo);
+    color: var(--testo);
+    font-family: var(--font);
+    font-size: 16px;
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== HEADER ===== */
+header {
+    border-bottom: 1px solid var(--bordo);
+    padding: 1.8rem 1.5rem 1.5rem;
+}
+
+.header-inner {
+    max-width: 820px;
+    margin: 0 auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-bottom: 0.35rem;
+}
+
+.logo-icon {
+    font-size: 1.7rem;
+    line-height: 1;
+}
+
+.logo h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--accento);
+}
+
+.subtitle {
+    font-size: 0.88rem;
+    color: var(--testo-muted);
+    padding-left: 2.25rem;
+}
+
+/* ===== MAIN ===== */
+main {
+    flex: 1;
+    max-width: 820px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 2rem 1.5rem;
+}
+
+/* ===== RICERCA ===== */
+.search-section {
+    margin-bottom: 1.4rem;
+}
+
+.search-box {
+    display: flex;
+    margin-bottom: 0.75rem;
+}
+
+.search-box input {
+    flex: 1;
+    background: var(--sfondo-card);
+    border: 1px solid var(--bordo);
+    border-right: none;
+    color: var(--testo);
+    font-family: var(--font);
+    font-size: 1rem;
+    padding: 0.7rem 1rem;
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.search-box input:focus {
+    border-color: var(--accento);
+}
+
+.search-box input::placeholder {
+    color: var(--testo-muted);
+    opacity: 0.7;
+}
+
+.search-box button {
+    background: var(--accento);
+    border: 1px solid var(--accento);
+    color: #000;
+    font-family: var(--font);
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.7rem 1.4rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+}
+
+.search-box button:hover {
+    opacity: 0.88;
+}
+
+.search-box button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* toggle unità */
+.unit-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.83rem;
+    color: var(--testo-muted);
+}
+
+.unit-toggle button {
+    background: transparent;
+    border: 1px solid var(--bordo);
+    color: var(--testo-muted);
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    padding: 0.2rem 0.55rem;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.unit-toggle button:hover:not(.unit-active) {
+    border-color: var(--testo-muted);
+    color: var(--testo);
+}
+
+.unit-active {
+    background: var(--verde) !important;
+    border-color: var(--verde) !important;
+    color: #000 !important;
+    font-weight: 500;
+}
+
+/* ===== MESSAGGI DI STATO ===== */
+.status-msg {
+    padding: 0.7rem 1rem;
+    font-family: var(--mono);
+    font-size: 0.88rem;
+    margin-bottom: 1.5rem;
+    border-left: 3px solid transparent;
+}
+
+.status-msg.caricamento {
+    background: var(--sfondo-card);
+    border-left-color: var(--accento);
+    color: var(--accento);
+}
+
+.status-msg.successo {
+    background: var(--sfondo-card);
+    border-left-color: var(--verde);
+    color: var(--verde);
+}
+
+.status-msg.errore {
+    background: var(--sfondo-card);
+    border-left-color: var(--errore);
+    color: var(--errore);
+}
+
+.nascosto {
+    display: none !important;
+}
+
+/* ===== METEO ATTUALE ===== */
+#current-weather {
+    background: var(--sfondo-card);
+    border: 1px solid var(--bordo);
+    padding: 1.5rem;
+    margin-bottom: 1.4rem;
+}
+
+.citta-nome {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+}
+
+.citta-regione {
+    font-size: 0.78rem;
+    color: var(--testo-muted);
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.25rem;
+    margin-top: 0.2rem;
+}
+
+.meteo-principale {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.9rem;
+    margin-bottom: 1.25rem;
+}
+
+.meteo-emoji {
+    font-size: 3.2rem;
+    line-height: 1;
+}
+
+.temp-valore {
+    font-family: var(--mono);
+    font-size: 3.2rem;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--accento);
+}
+
+.meteo-desc {
+    font-size: 0.88rem;
+    color: var(--testo-muted);
+    padding-bottom: 0.35rem;
+    align-self: flex-end;
+}
+
+.meteo-dettagli {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    border-top: 1px solid var(--bordo);
+    padding-top: 1rem;
+}
+
+.dettaglio {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.dettaglio-etichetta {
+    font-size: 0.68rem;
+    color: var(--testo-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: var(--mono);
+}
+
+.dettaglio-valore {
+    font-size: 1.05rem;
+    font-family: var(--mono);
+}
+
+/* ===== PREVISIONI 7 GIORNI ===== */
+#forecast-section h3 {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--testo-muted);
+    font-family: var(--mono);
+    margin-bottom: 0.75rem;
+}
+
+.griglia-previsioni {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.45rem;
+}
+
+.card-previsione {
+    background: var(--sfondo-card2);
+    border: 1px solid var(--bordo);
+    padding: 0.65rem 0.35rem;
+    text-align: center;
+    transition: border-color 0.2s, background 0.2s;
+    cursor: default;
+}
+
+.card-previsione:hover {
+    border-color: var(--verde);
+    background: var(--sfondo-card);
+}
+
+.prev-giorno {
+    font-size: 0.67rem;
+    color: var(--testo-muted);
+    font-family: var(--mono);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+}
+
+.prev-emoji {
+    font-size: 1.35rem;
+    margin-bottom: 0.4rem;
+    display: block;
+}
+
+.prev-temperature {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    line-height: 1.5;
+}
+
+.prev-max {
+    color: var(--testo);
+}
+
+.prev-min {
+    color: var(--testo-muted);
+}
+
+/* ===== FOOTER ===== */
+footer {
+    border-top: 1px solid var(--bordo);
+    padding: 0.9rem 1.5rem;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--testo-muted);
+}
+
+footer a {
+    color: var(--verde);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+    .griglia-previsioni {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .meteo-dettagli {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .citta-nome {
+        font-size: 1.5rem;
+    }
+
+    .temp-valore {
+        font-size: 2.5rem;
+    }
+
+    .logo h1 {
+        font-size: 1.45rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .griglia-previsioni {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
